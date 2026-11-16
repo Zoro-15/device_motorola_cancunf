@@ -4,6 +4,12 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Needed at product time by device/qcom/common (AOSPA); mt6855 matches no Qualcomm list.
+TARGET_BOARD_PLATFORM := mt6855
+
+# MediaTek: no Qualcomm components (Adreno, DSP, QTI audio/BT/display/GPS...) from device/qcom/common.
+TARGET_COMMON_QTI_COMPONENTS :=
+
 DEVICE_PATH := device/motorola/cancunf
 
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
@@ -357,9 +363,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/permissions/privapp-permissions-com.android.hotwordenrollment.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-com.android.hotwordenrollment.xml
 
-# Platform
-TARGET_BOARD_PLATFORM := mt6855
-
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.pixel-libperfmgr
@@ -458,3 +461,10 @@ PRODUCT_COPY_FILES += \
 # Inherit the proprietary files
 $(call inherit-product, vendor/motorola/cancunf/cancunf-vendor.mk)
 $(call inherit-product, vendor/motorola/cancunf-motcamera/cancunf-motcamera-vendor.mk)
+
+# Fastbootd (AOSPA doesn't add by default)
+PRODUCT_PACKAGES += \
+    fastbootd
+
+# AOSPA ships its own vendor.lineage.health (vendor/aospa/interfaces/health); don't scan Lineage's copy.
+PRODUCT_SOURCE_ROOT_DIRS += -hardware/lineage/interfaces/health
