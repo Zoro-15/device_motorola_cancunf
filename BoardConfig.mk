@@ -213,3 +213,6 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # Android 17 core fixes and AOSPA compatibility stand-ins, re-applied on every build
 CANCUNF_CORE_PATCHED := $(shell bash device/motorola/cancunf/patches/apply-core.sh)
+
+# AOSPA: framework matrix entries for HALs only Lineage's matrix lists
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += $(DEVICE_PATH)/configs/vintf/framework_compatibility_matrix_aospa.xml
