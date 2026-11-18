@@ -466,6 +466,19 @@ $(call inherit-product, vendor/motorola/cancunf-motcamera/cancunf-motcamera-vend
 PRODUCT_PACKAGES += \
     fastbootd
 
+# Kernel: Lineage's kernel task installed the prebuilt kernel; AOSPA doesn't, so do it here.
+PRODUCT_COPY_FILES += \
+    device/motorola/cancunf-kernel/Image.gz:kernel
+
+# DEBUG-ADB: only for userdebug/eng builds, user builds unaffected.
+# adb_keys is a local file (never committed): pre-authorizes the build machine's ADB key.
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SYSTEM_PROPERTIES += persist.sys.usb.config=adb
+ifneq ($(wildcard device/motorola/cancunf/adb_keys),)
+PRODUCT_ADB_KEYS := device/motorola/cancunf/adb_keys
+endif
+endif
+
 # AOSPA ships its own vendor.lineage.health (vendor/aospa/interfaces/health); don't scan Lineage's copy.
 PRODUCT_SOURCE_ROOT_DIRS += -hardware/lineage/interfaces/health
 

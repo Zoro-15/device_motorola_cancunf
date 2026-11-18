@@ -210,3 +210,6 @@ WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{AP}, 1}}
 WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{P2P}, 1}}
 WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{NAN}, 1}}
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
+
+# Android 17 core fixes and AOSPA compatibility stand-ins, re-applied on every build
+CANCUNF_CORE_PATCHED := $(shell bash device/motorola/cancunf/patches/apply-core.sh)
