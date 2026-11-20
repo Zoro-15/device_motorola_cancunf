@@ -15,3 +15,6 @@ r_dir_file(mtk_hal_camera, persist_data_file)
 r_dir_file(mtk_hal_camera, sysfs_therm)
 rw_dir_file(mtk_hal_camera, vendor_persist_camera_file)
 set_prop(mtk_hal_camera, vendor_mot_camera_prop)
+
+allow mtk_hal_camera hal_camera_service:service_manager find;
+binder_call(mtk_hal_camera, hal_camera_default)
