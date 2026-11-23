@@ -11,8 +11,8 @@
   <!-- Device tree: Zoro-15 clo branch with full AOSPA/CLO adaptations -->
   <project path="device/motorola/cancunf" name="device_motorola_cancunf" remote="zoro" revision="clo" />
 
-  <!-- Prebuilt Kernel: Sarthak Roy seventeen branch (GKI boot header v4) -->
-  <project path="device/motorola/cancunf-kernel" name="device_motorola_cancunf-kernel" remote="sarthak" revision="seventeen" />
+  <!-- Prebuilt Kernel: Sarthak Roy seventeen branch (pinned to pre-ARB update commit 741572a) -->
+  <project path="device/motorola/cancunf-kernel" name="device_motorola_cancunf-kernel" remote="sarthak" revision="741572ae68a88539c38486a74ca4bbb48c2e0da6" />
 
   <!-- Vendor blobs: Sarthak Roy seventeen branch on GitHub (pinned to pre-ARB update commit 603b93f) -->
   <project path="vendor/motorola/cancunf" name="vendor_motorola_cancunf" remote="sarthak" revision="603b93ff7a89a144e6c7d4f29cc32c8df322879e" />

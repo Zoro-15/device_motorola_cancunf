@@ -2,7 +2,7 @@
   {
     "repository": "sarthakroy2002/device_motorola_cancunf-kernel",
     "target_path": "device/motorola/cancunf-kernel",
-    "branch": "seventeen"
+    "branch": "741572ae68a88539c38486a74ca4bbb48c2e0da6"
   },
   {
     "repository": "sarthakroy2002/vendor_motorola_cancunf",
