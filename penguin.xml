@@ -14,8 +14,8 @@
   <!-- Prebuilt Kernel: Sarthak Roy seventeen branch (GKI boot header v4) -->
   <project path="device/motorola/cancunf-kernel" name="device_motorola_cancunf-kernel" remote="sarthak" revision="seventeen" />
 
-  <!-- Vendor blobs: Sarthak Roy seventeen branch on GitHub -->
-  <project path="vendor/motorola/cancunf" name="vendor_motorola_cancunf" remote="sarthak" revision="seventeen" />
+  <!-- Vendor blobs: Sarthak Roy seventeen branch on GitHub (pinned to pre-ARB update commit 603b93f) -->
+  <project path="vendor/motorola/cancunf" name="vendor_motorola_cancunf" remote="sarthak" revision="603b93ff7a89a144e6c7d4f29cc32c8df322879e" />
   <project path="vendor/motorola/cancunf-motcamera" name="vendor_motorola_cancunf-motcamera" remote="yaap" revision="seventeen" />
 
   <!-- MediaTek HAL and sepolicy -->
