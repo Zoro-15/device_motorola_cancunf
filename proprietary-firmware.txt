@@ -1,16 +1,16 @@
 # All unpinned blobs below are extracted from the release mentioned in proprietary-files.txt
 
-dpm.img;AB
-gpueb.img;AB
-gz.img;AB
-lk.img;AB
-logo.img;AB
-mcupm.img;AB
-md1img.img;AB
-pi_img.img;AB
-preloader.img;AB
-scp.img;AB
-spmfw.img;AB
-sspm.img;AB
-tee.img;AB
-vcp.img;AB
+dpm.img
+gpueb.img
+gz.img
+lk.img
+logo.img
+mcupm.img
+md1img.img
+pi_img.img
+preloader.img
+scp.img
+spmfw.img
+sspm.img
+tee.img
+vcp.img

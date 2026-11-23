@@ -189,6 +189,22 @@ BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 include vendor/motorola/cancunf/BoardConfigVendor.mk
 include vendor/motorola/cancunf-motcamera/BoardConfigVendor.mk
 
+# Filter out firmware/radio partitions inherited from vendor BoardConfigVendor.mk.
+# Cancunf OTA packages must strictly update only the 10 core OS partitions.
+# Radio and bootloader partitions (dpm, lk, preloader, etc.) are NOT built into RADIO/
+# and must never be updated via OTA payloads to prevent hard-brick hazards.
+AB_OTA_PARTITIONS := \
+    boot \
+    dtbo \
+    product \
+    system \
+    system_ext \
+    vbmeta \
+    vbmeta_system \
+    vendor \
+    vendor_boot \
+    vendor_dlkm
+
 # Wifi
 BOARD_WLAN_DEVICE := MediaTek
 WPA_SUPPLICANT_VERSION := VER_0_8_X
