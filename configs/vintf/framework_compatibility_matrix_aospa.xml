@@ -1,0 +1,11 @@
+<!-- HALs in cancunf that AOSPA's framework matrix omits. -->
+<compatibility-matrix version="1.0" type="framework">
+    <hal format="aidl" optional="true">
+        <name>vendor.qti.hardware.wifi.supplicant</name>
+        <version>1</version>
+        <interface>
+            <name>ISupplicantVendor</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>
