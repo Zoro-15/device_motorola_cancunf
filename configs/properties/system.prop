@@ -4,10 +4,6 @@ ro.audio.usb.period_us=16000
 ro.audio.flinger_standbytime_ms=1000
 ro.camera.sound.forced=0
 
-# Camera
-persist.vendor.camera.privapp.list=org.lineageos.aperture,com.motorola.camera3
-vendor.camera.aux.packagelist=org.lineageos.aperture,com.motorola.camera3
-
 # Dex
 dalvik.vm.dex2oat64.enabled=true
 
@@ -34,13 +30,8 @@ ro.mot.product_wave=2023.3
 # Partition
 ro.product.property_source_order=odm,vendor,product,system
 
-# Radio
-vendor.rild.libargs=-d /dev/ttyC0
-vendor.rild.libpath=mtk-ril.so
-
 # Wifi
 mediatek.wlan.ctia=0
-persist.vendor.wfc.sys_wfc_support=1
 ro.mediatek.wlan.p2p=1
 ro.mediatek.wlan.wsc=1
 wifi.direct.interface=p2p0

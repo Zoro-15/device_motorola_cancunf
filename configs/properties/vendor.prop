@@ -51,6 +51,7 @@ persist.vendor.camera.p1.streamBufCnt.imgo=10
 persist.vendor.camera.p1.streamBufCnt.lcso=10
 persist.vendor.camera.p1.streamBufCnt.rrzo=10
 persist.vendor.camera.physical.num=3
+persist.vendor.camera.privapp.list=org.lineageos.aperture,com.motorola.camera3
 persist.vendor.camera3.pipeline.bufnum.base.imgo=4
 persist.vendor.camera3.pipeline.bufnum.base.lcso=4
 persist.vendor.camera3.pipeline.bufnum.base.rrzo=4
@@ -65,12 +66,14 @@ persist.vendor.camera3.pipeline.bufnum.min.low_ram.imgo=6
 persist.vendor.camera3.pipeline.bufnum.min.low_ram.lcso=6
 persist.vendor.camera3.pipeline.bufnum.min.low_ram.rrzo=6
 persist.vendor.camera3.pipeline.bufnum.min.low_ram.rsso=6
+ro.vendor.afbc.enable=3
 ro.vendor.camera.directfdyuv.support=1
 ro.vendor.camera.isp.support.colorspace=0
 ro.vendor.camera3.zsl.default=220
 ro.vendor.mtk_cam_security_support=0
 ro.vendor.mtk_camera_app_version=3
 ro.vendor.mtk_slow_motion_support=1
+vendor.camera.aux.packagelist=org.lineageos.aperture,com.motorola.camera3
 vendor.camera.mdp.cz.enable=1
 vendor.camera.mdp.dre.enable=1
 vendor.camera.mot.jpegmaxscaleratio=2.5
@@ -307,6 +310,8 @@ ro.vendor.sim_me_lock_mode=3
 ro.vendor.smvr.p2batch.hd=4
 telephony.active_modems.max_count=2
 vendor.connsys.driver.ready=no
+vendor.rild.libargs=-d /dev/ttyC0
+vendor.rild.libpath=mtk-ril.so
 
 # Sensors
 ro.vendor.fusion.algorithm.in.sensorhub=yes
@@ -342,6 +347,7 @@ ro.vendor.vibrator.hal.tick.duration=47
 
 # Wifi
 persist.vendor.mtk_wfc_support=1
+persist.vendor.wfc.sys_wfc_support=1
 ro.vendor.wfd.dummy.enable=0
 ro.vendor.wfd.iframesize.level=0
 ro.vendor.wifi.sap.concurrent.iface=ap1
