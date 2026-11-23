@@ -4,6 +4,12 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Needed at product time by device/qcom/common (AOSPA); mt6855 matches no Qualcomm list.
+TARGET_BOARD_PLATFORM := mt6855
+
+# MediaTek: no Qualcomm components (Adreno, DSP, QTI audio/BT/display/GPS...) from device/qcom/common.
+TARGET_COMMON_QTI_COMPONENTS :=
+
 DEVICE_PATH := device/motorola/cancunf
 
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
@@ -97,7 +103,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcamera2ndk_vendor
 
-$(call soong_config_set,libcameraservice,ext_lib,//$(DEVICE_PATH):libcameraservice_extension.cancunf)
+$(call soong_config_set,libcameraservice,ext_lib,//$(DEVICE_PATH)/camera:libcameraservice_extension.cancunf)
 
 # Dex-pre-opt exclusions
 $(call add-product-dex-preopt-module-config,MotoSignatureApp,disable)
@@ -134,14 +140,14 @@ PRODUCT_PACKAGES += \
 
 # Felica 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/felica/retjp/common.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica/common.cfg \
-    $(LOCAL_PATH)/configs/felica/retjp/mfm.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica/mfm.cfg \
-    $(LOCAL_PATH)/configs/felica/retjp/mfs.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica/mfs.cfg
+    $(DEVICE_PATH)/configs/felica/retjp/common.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica/common.cfg \
+    $(DEVICE_PATH)/configs/felica/retjp/mfm.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica/mfm.cfg \
+    $(DEVICE_PATH)/configs/felica/retjp/mfs.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica/mfs.cfg
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/felica/ymobile/common.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica_ymobile/common.cfg \
-    $(LOCAL_PATH)/configs/felica/ymobile/mfm.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica_ymobile/mfm.cfg \
-    $(LOCAL_PATH)/configs/felica/ymobile/mfs.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica_ymobile/mfs.cfg
+    $(DEVICE_PATH)/configs/felica/ymobile/common.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica_ymobile/common.cfg \
+    $(DEVICE_PATH)/configs/felica/ymobile/mfm.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica_ymobile/mfm.cfg \
+    $(DEVICE_PATH)/configs/felica/ymobile/mfs.cfg:$(TARGET_COPY_OUT_PRODUCT)/etc/felica_ymobile/mfs.cfg
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -357,9 +363,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/permissions/privapp-permissions-com.android.hotwordenrollment.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-com.android.hotwordenrollment.xml
 
-# Platform
-TARGET_BOARD_PLATFORM := mt6855
-
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.pixel-libperfmgr
@@ -458,3 +461,42 @@ PRODUCT_COPY_FILES += \
 # Inherit the proprietary files
 $(call inherit-product, vendor/motorola/cancunf/cancunf-vendor.mk)
 $(call inherit-product, vendor/motorola/cancunf-motcamera/cancunf-motcamera-vendor.mk)
+
+# Fastbootd (AOSPA doesn't add by default)
+PRODUCT_PACKAGES += \
+    fastbootd
+
+# Kernel: Lineage's kernel task installed the prebuilt kernel; AOSPA doesn't, so do it here.
+PRODUCT_COPY_FILES += \
+    device/motorola/cancunf-kernel/Image.gz:kernel
+
+# DEBUG-ADB: only for userdebug/eng builds, user builds unaffected.
+# adb_keys is a local file (never committed): pre-authorizes the build machine's ADB key.
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SYSTEM_PROPERTIES += persist.sys.usb.config=adb
+ifneq ($(wildcard device/motorola/cancunf/adb_keys),)
+PRODUCT_ADB_KEYS := device/motorola/cancunf/adb_keys
+endif
+endif
+
+# AOSPA ships its own vendor.lineage.health (vendor/aospa/interfaces/health); don't scan Lineage's copy.
+PRODUCT_SOURCE_ROOT_DIRS += -hardware/lineage/interfaces/health
+
+# UDFPS-EXCLUDES: vendor/udfps-resources duplicates vendor/aospa themes/SDK; cancunf uses a side-mounted FPS
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/udfps-resources
+
+# QCOM-EXCLUDES: Qualcomm hardware repos in the CLO tree; cancunf (MediaTek) installs nothing from them
+PRODUCT_SOURCE_ROOT_DIRS += -external/drm_hwcomposer
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/data-ipa-cfg-mgr
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/data-ipa-cfg-mgr-legacy
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/dataservices
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/libvmmem
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/recovery-ext
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/thermal-hal
+PRODUCT_SOURCE_ROOT_DIRS += -device/amlogic/yukawa
+PRODUCT_SOURCE_ROOT_DIRS += -hardware/qcom/bootctrl
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/common
+
+# PenguinOS: maintainer name in Settings > About phone
+PRODUCT_PACKAGES += \
+    SettingsPenguinOverlayCancunf

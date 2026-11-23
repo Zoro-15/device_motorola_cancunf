@@ -12,11 +12,10 @@ TARGET_SUPPORTS_OMX_SERVICE := false
 # Inherit from device makefile.
 $(call inherit-product, device/motorola/cancunf/device.mk)
 
-# Inherit some common PixelOS stuff.
-$(call inherit-product, vendor/custom/config/common_full_phone.mk)
-TARGET_SCREEN_WIDTH := 1080
+# Inherit from the AOSPA (PenguinOS) configuration.
+$(call inherit-product, vendor/aospa/target/product/aospa-target.mk)
 
-PRODUCT_NAME := custom_cancunf
+PRODUCT_NAME := aospa_cancunf
 PRODUCT_DEVICE := cancunf
 PRODUCT_MANUFACTURER := motorola
 PRODUCT_BRAND := motorola
@@ -28,3 +27,6 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceName=cancunf \
     BuildDesc="cancunf_g_sysq-user 15 V1TDS35H.83-20-5-12 f7b47-64e7f1 release-keys" \
     BuildFingerprint=motorola/cancunf_g_sysq/cancunf:15/V1TDS35H.83-20-5-12/f7b47-64e7f1:user/release-keys
+
+# Boot animation resolution.
+TARGET_BOOT_ANIMATION_RES := 1080

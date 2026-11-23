@@ -1,0 +1,4 @@
+runtime_resource_overlay {
+    name: "SettingsPenguinOverlayCancunf",
+    product_specific: true,
+}
