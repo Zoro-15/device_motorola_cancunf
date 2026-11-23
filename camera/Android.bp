@@ -19,9 +19,9 @@ cc_library_static {
     include_dirs: [
         "frameworks/av/services/camera/libcameraservice/common"
     ],
+    local_include_dirs: ["include"],
     shared_libs: [
         "libbase",
         "liblog",
     ],
-    header_libs: ["generated_kernel_headers"]
 }
