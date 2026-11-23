@@ -4,6 +4,10 @@ import sys
 import xml.etree.ElementTree as ET
 import subprocess
 
+# Ensure execution is always anchored to this device tree root
+DEVICE_TREE_DIR = os.path.dirname(os.path.abspath(__file__))
+os.chdir(DEVICE_TREE_DIR)
+
 def run_check(name, fn):
     print(f"[*] Testing: {name} ...", end=" ")
     try:
