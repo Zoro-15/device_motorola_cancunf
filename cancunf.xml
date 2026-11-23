@@ -23,6 +23,7 @@
   <project path="device/mediatek/sepolicy_vndr" name="device_mediatek_sepolicy_vndr" remote="yaap" revision="seventeen" />
 
   <!-- Features -->
+  <remove-project name="Project-PenguinOS/android_vendor_addons" />
   <project path="packages/apps/DisplayFeatures" name="android_packages_apps_DisplayFeatures" remote="cyberknight777" revision="master" />
 
   <!-- Lineage & Pixel HAL interfaces required by cancunf touch, power-libperfmgr, and MediaTek sepolicy -->

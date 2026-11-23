@@ -482,6 +482,9 @@ endif
 # AOSPA ships its own vendor.lineage.health (vendor/aospa/interfaces/health); don't scan Lineage's copy.
 PRODUCT_SOURCE_ROOT_DIRS += -hardware/lineage/interfaces/health
 
+# UDFPS-EXCLUDES: vendor/udfps-resources duplicates vendor/aospa themes/SDK; cancunf uses a side-mounted FPS
+PRODUCT_SOURCE_ROOT_DIRS += -vendor/udfps-resources
+
 # QCOM-EXCLUDES: Qualcomm hardware repos in the CLO tree; cancunf (MediaTek) installs nothing from them
 PRODUCT_SOURCE_ROOT_DIRS += -external/drm_hwcomposer
 PRODUCT_SOURCE_ROOT_DIRS += -vendor/qcom/opensource/data-ipa-cfg-mgr
