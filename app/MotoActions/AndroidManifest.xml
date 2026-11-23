@@ -71,12 +71,6 @@
         <activity android:name=".TouchKeyHandler" />
 
         <activity
-            android:name=".actions.TapGestureSettings"
-            android:label="@string/tap_gesture_settings_title"
-            android:exported="false">
-        </activity>
-
-        <activity
             android:name=".ModelNumberActivity"
             android:exported="false"
             android:label="@string/model_number_title">

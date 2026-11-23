@@ -19,10 +19,6 @@ package org.lineageos.settings.device;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.UserHandle;
-import android.provider.Settings;
-
-import android.media.AudioManager;
 
 public class Constants {
 

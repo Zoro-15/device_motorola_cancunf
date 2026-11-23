@@ -24,7 +24,6 @@ import android.content.pm.PackageManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.Log;
-import org.lineageos.settings.device.actions.TapGestureSettings;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
     private static final String TAG = "MotoActions";
@@ -32,7 +31,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         Log.i(TAG, "Booting");
-        TapGestureSettings.MainSettingsFragment.restoreTapGestureStates(context);
         context.startServiceAsUser(new Intent(context, MotoActionsService.class),
                 UserHandle.CURRENT);
         felicaDisabler(context);
