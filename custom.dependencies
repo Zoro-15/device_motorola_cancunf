@@ -1,12 +1,13 @@
 [
   {
-    "repository": "PixelOS-Devices/android_device_motorola_cancunf-kernel",
-    "target_path": "device/motorola/cancunf-kernel"
+    "repository": "Zoro-15/device_motorola_cancunf-kernel",
+    "target_path": "device/motorola/cancunf-kernel",
+    "branch": "pengu"
   },
   {
-    "remote": "gitlab",
-    "repository": "NoPrincessHere/proprietary_vendor_motorola_cancunf",
-    "target_path": "vendor/motorola/cancunf"
+    "repository": "Zoro-15/vendor_motorola_cancunf",
+    "target_path": "vendor/motorola/cancunf",
+    "branch": "pengu"
   },
   {
     "repository": "YAAP/vendor_motorola_cancunf-motcamera",

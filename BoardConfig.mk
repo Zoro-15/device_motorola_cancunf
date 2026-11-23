@@ -62,19 +62,18 @@ BOARD_MKBOOTIMG_ARGS += \
     --tags_offset $(BOARD_TAGS_OFFSET)
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 
+# Kernel (prebuilt)
+TARGET_KERNEL_NO_GCC := true
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/$(BOARD_KERNEL_IMAGE_NAME)
 TARGET_NO_KERNEL_OVERRIDE := true
-TARGET_KERNEL_SOURCE := device/motorola/cancunf-kernel/kernel-headers
-
-LOCAL_KERNEL := $(KERNEL_PATH)/$(BOARD_KERNEL_IMAGE_NAME)
-PRODUCT_COPY_FILES += \
-	$(LOCAL_KERNEL):kernel
 
 BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
 BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtb
 BOARD_MKBOOTIMG_ARGS += --dtb $(BOARD_PREBUILT_DTBIMAGE_DIR)/mt6855.dtb
-BOARD_USES_GENERIC_KERNEL_IMAGE := true
 
 BOARD_VENDOR_RAMDISK_FRAGMENTS := dlkm
 BOARD_VENDOR_RAMDISK_FRAGMENT.dlkm.PREBUILT := $(KERNEL_PATH)/modules/vendor_boot/dlkm.cpio
@@ -190,6 +189,22 @@ BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 include vendor/motorola/cancunf/BoardConfigVendor.mk
 include vendor/motorola/cancunf-motcamera/BoardConfigVendor.mk
 
+# Filter out firmware/radio partitions inherited from vendor BoardConfigVendor.mk.
+# Cancunf OTA packages must strictly update only the 10 core OS partitions.
+# Radio and bootloader partitions (dpm, lk, preloader, etc.) are NOT built into RADIO/
+# and must never be updated via OTA payloads to prevent hard-brick hazards.
+AB_OTA_PARTITIONS := \
+    boot \
+    dtbo \
+    product \
+    system \
+    system_ext \
+    vbmeta \
+    vbmeta_system \
+    vendor \
+    vendor_boot \
+    vendor_dlkm
+
 # Wifi
 BOARD_WLAN_DEVICE := MediaTek
 WPA_SUPPLICANT_VERSION := VER_0_8_X
@@ -210,3 +225,9 @@ WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{AP}, 1}}
 WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{P2P}, 1}}
 WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{NAN}, 1}}
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
+
+# Android 17 core fixes and AOSPA compatibility stand-ins, re-applied on every build
+CANCUNF_CORE_PATCHED := $(shell bash device/motorola/cancunf/patches/apply-core.sh)
+
+# AOSPA: framework matrix entries for HALs only Lineage's matrix lists
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += $(DEVICE_PATH)/configs/vintf/framework_compatibility_matrix_aospa.xml
