@@ -22,13 +22,8 @@ ro.fm.short_ana_sup=1
 ro.mot.build.customerid=global
 
 # RIL
-persist.vendor.mtk_rcs_ua_support=0
-persist.vendor.mtk_uce_support=0
-persist.vendor.vt.RTPInfo=1
-persist.vendor.vt.supported=1
 ril.subscription.types=RUIM
 ro.telephony.default_network=26,26
-ro.vendor.radio.imei.sv=37
 ro.com.google.lens.oem_camera_package=com.motorola.camera3
 
 # Skia tracing
